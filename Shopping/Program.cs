@@ -1,8 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Shopping.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Es el que construye la app
 builder.Services.AddControllersWithViews();
-
+//Inyector
+builder.Services.AddDbContext<DataContext>(o =>
+{
+    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaulConnection"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
