@@ -18,7 +18,7 @@ namespace Shopping.Controllers
         {
             _context = context;
         }
-
+        [HttpGet]
         // GET: Countries
         public async Task<IActionResult> Index()
         {
@@ -26,16 +26,16 @@ namespace Shopping.Controllers
                           View(await _context.Countries.ToListAsync()) :
                           Problem("Entity set 'DataContext.Countries'  is null.");
         }
-
+        [HttpGet]
         // GET: Countries/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Countries == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var country = await _context.Countries
+            Country country = await _context.Countries
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (country == null)
             {
@@ -44,7 +44,7 @@ namespace Shopping.Controllers
 
             return View(country);
         }
-
+        [HttpGet]
         // GET: Countries/Create
         public IActionResult Create()
         {
@@ -56,7 +56,7 @@ namespace Shopping.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] Country country)
+        public async Task<IActionResult> Create(Country country)
         {
             if (ModelState.IsValid)
             {
