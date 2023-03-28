@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shopping.Data;
 using Shopping.Data.Entities;
@@ -11,6 +7,8 @@ using Shopping.Models;
 
 namespace Shopping.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    
     public class CountriesController : Controller
     {
         private readonly DataContext _context;
@@ -23,9 +21,9 @@ namespace Shopping.Controllers
         // GET: Countries
         public async Task<IActionResult> Index()
         {
-                return View(await _context.Countries
-                .Include(c => c.States)
-                .ToListAsync());
+            return View(await _context.Countries
+            .Include(c => c.States)
+            .ToListAsync());
             //return View(await _context.Countries.ToListAsync());
         }
         //[HttpGet]
@@ -55,7 +53,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
 
-            State state= await _context.States
+            State state = await _context.States
                  .Include(s => s.Country)
                 .Include(s => s.Cities)
                 .FirstOrDefaultAsync(m => m.Id == id);
@@ -87,7 +85,7 @@ namespace Shopping.Controllers
         // GET: Countries/Create
         public IActionResult Create()
         {
-            Country country = new() { States =new List <State>()};
+            Country country = new() { States = new List<State>() };
             return View(country);
         }
 
@@ -132,7 +130,7 @@ namespace Shopping.Controllers
                 return NotFound();
             }
             Country country = await _context.Countries.FindAsync(id);
-            if(country == null)
+            if (country == null)
             {
                 return NotFound();
             }
@@ -163,7 +161,7 @@ namespace Shopping.Controllers
                     };
                     _context.Add(state);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Details), new { Id=model.CountryId});
+                    return RedirectToAction(nameof(Details), new { Id = model.CountryId });
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
@@ -254,7 +252,7 @@ namespace Shopping.Controllers
             }
 
             Country country = await _context.Countries
-                .Include( c => c.States)
+                .Include(c => c.States)
                 .FirstOrDefaultAsync(c => c.Id == id);
             if (country == null)
             {
@@ -320,9 +318,9 @@ namespace Shopping.Controllers
 
             StateViewModel model = new()
             {
-                CountryId= state.Country.Id,
-                Id= state.Id,
-                Name= state.Name,
+                CountryId = state.Country.Id,
+                Id = state.Id,
+                Name = state.Name,
             };
 
             return View(model);
@@ -346,8 +344,8 @@ namespace Shopping.Controllers
                 {
                     State state = new()
                     {
-                        Id= model.Id,
-                        Name= model.Name,
+                        Id = model.Id,
+                        Name = model.Name,
                     };
                     _context.Update(state);
                     await _context.SaveChangesAsync();
@@ -416,7 +414,7 @@ namespace Shopping.Controllers
                     {
                         Id = model.Id,
                         Name = model.Name,
-                       // State = await _context.States.FindAsync(model.StateId)
+                        // State = await _context.States.FindAsync(model.StateId)
                     };
                     _context.Update(city);
                     await _context.SaveChangesAsync();
@@ -476,7 +474,7 @@ namespace Shopping.Controllers
             {
                 _context.Countries.Remove(country);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
