@@ -9,8 +9,9 @@ namespace Shopping.Helpers
         Task<User> GetUserAsync(string email);
 
         Task<IdentityResult> AddUserAsync(User user, string password);
+		Task<User> AddUserAsync(AddUserViewModel model);
 
-        Task CheckRoleAsync(string roleName);
+		Task CheckRoleAsync(string roleName);
 
         Task AddUserToRoleAsync(User user, string roleName);
 
