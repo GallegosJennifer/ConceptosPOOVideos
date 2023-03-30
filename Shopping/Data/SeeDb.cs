@@ -39,14 +39,14 @@ namespace Shopping.Data
             {
                 await AddProductAsync("Adidas Superstar", 270000M, 12F, new List<string>() { "Calzado", "Deportes" }, new List<string>() { "adidasbkancos.jpg" });
                 await AddProductAsync("Nike For One", 250000M, 12F, new List<string>() { "Calzado", "Deportes" }, new List<string>() { "naik.jpg" });
-                await AddProductAsync("AirPods", 1300000M, 12F, new List<string>() { "Tecnología", "Apple" }, new List<string>() { "airpos.jpg" });
-                await AddProductAsync("Audifonos Bose", 870000M, 12F, new List<string>() { "Tecnología" }, new List<string>() { "bose.jpg" });
+                await AddProductAsync("AirPods", 1300000M, 12F, new List<string>() { "Tecnologia", "Apple" }, new List<string>() { "airpos.jpg" });
+                await AddProductAsync("Audifonos Bose", 870000M, 12F, new List<string>() { "Tecnologia" }, new List<string>() { "bose.jpg" });
                 await AddProductAsync("Bicicleta Ribble", 12000000M, 6F, new List<string>() { "Deportes" }, new List<string>() { "bici.jpg" });
                 await AddProductAsync("Camisa Cuadros", 56000M, 24F, new List<string>() { "Ropa" }, new List<string>() { "cuadros.jpg" });
                 await AddProductAsync("Casco Bicicleta", 820000M, 12F, new List<string>() { "Deportes" }, new List<string>() { "casco.jpg" });
                 //await AddProductAsync("iPad", 2300000M, 6F, new List<string>() { "Tecnología", "Apple" }, new List<string>() { "ipad.jpg" });
-                await AddProductAsync("iPhone 13", 5200000M, 6F, new List<string>() { "Tecnología", "Apple" }, new List<string>() { "iphone.jpg" });
-                await AddProductAsync("Mac Book Pro", 12100000M, 6F, new List<string>() { "Tecnología", "Apple" }, new List<string>() { "macbook.jpg" });
+                await AddProductAsync("iPhone 13", 5200000M, 6F, new List<string>() { "Tecnologia", "Apple" }, new List<string>() { "iphone.jpg" });
+                await AddProductAsync("Mac Book Pro", 12100000M, 6F, new List<string>() { "Tecnologia", "Apple" }, new List<string>() { "macbook.jpg" });
                 await AddProductAsync("Mancuernas", 370000M, 12F, new List<string>() { "Deportes" }, new List<string>() { "mancuernas.jpg" });
                 await AddProductAsync("Mascarilla Cara", 26000M, 100F, new List<string>() { "Belleza" }, new List<string>() { "mascarilla.jpg" });
                 await AddProductAsync("New Balance 530", 180000M, 12F, new List<string>() { "Calzado", "Deportes" }, new List<string>() { "balancera.jpg" });
@@ -54,11 +54,11 @@ namespace Shopping.Data
                 await AddProductAsync("Nike Zoom", 249900M, 12F, new List<string>() { "Calzado", "Deportes" }, new List<string>() { "zoom.jpg" });
                 //await AddProductAsync("Buso Adidas Mujer", 134000M, 12F, new List<string>() { "Ropa", "Deportes" }, new List<string>() { "buso_adidas.jpg" });
                 //await AddProductAsync("Suplemento Boots Original", 15600M, 12F, new List<string>() { "Nutrición" }, new List<string>() { "Boost_Original.jpg" });
-                await AddProductAsync("Whey Protein", 252000M, 12F, new List<string>() { "Nutrición" }, new List<string>() { "suplemento.jpg" });
+                await AddProductAsync("Whey Protein", 252000M, 12F, new List<string>() { "Nutricion" }, new List<string>() { "suplemento.jpg" });
                 await AddProductAsync("Arnes Mascota", 25000M, 12F, new List<string>() { "Mascotas" }, new List<string>() { "arnes.jpg" });
                 await AddProductAsync("Cama Mascota", 99000M, 12F, new List<string>() { "Mascotas" }, new List<string>() { "mascotas.jpg" });
-                await AddProductAsync("Silla Gamer", 980000M, 12F, new List<string>() { "Gamer", "Tecnología" }, new List<string>() { "sillagamer.jpg" });
-                await AddProductAsync("Mouse Gamer", 132000M, 12F, new List<string>() { "Gamer", "Tecnología" }, new List<string>() { "mousegamer.jpg" });
+                await AddProductAsync("Silla Gamer", 980000M, 12F, new List<string>() { "Gamer", "Tecnologia" }, new List<string>() { "sillagamer.jpg" });
+                await AddProductAsync("Mouse Gamer", 132000M, 12F, new List<string>() { "Gamer", "Tecnologia" }, new List<string>() { "mousegamer.jpg" });
                 await _context.SaveChangesAsync();
             }
 
@@ -137,7 +137,7 @@ namespace Shopping.Data
 
         }
 
-        private async Task CheckCategoriesAsync()
+       /* private async Task CheckCategoriesAsync()
         {
             if (!_context.Categories.Any())
             {
@@ -145,11 +145,11 @@ namespace Shopping.Data
                 _context.Categories.Add(new Category { Name = "Ropa" });
                 _context.Categories.Add(new Category { Name = "Gamer" });
                 _context.Categories.Add(new Category { Name = "Belleza" });
-                _context.Categories.Add(new Category { Name = "Nutrición" });
+                _context.Categories.Add(new Category { Name = "Nutricion" });
             }
 
             await _context.SaveChangesAsync();
-        }
+        }*/
 
 
         private async Task CheckCountriesAsync()
@@ -293,9 +293,10 @@ namespace Shopping.Data
                 _context.Categories.Add(new Category { Name = "Deportes" });
                 _context.Categories.Add(new Category { Name = "Apple" });
                 _context.Categories.Add(new Category { Name = "Mascotas" });
-                await _context.SaveChangesAsync();
-
+               
             }
+            await _context.SaveChangesAsync();
+
         }
     }
 }
