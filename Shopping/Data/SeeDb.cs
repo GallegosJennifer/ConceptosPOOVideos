@@ -293,7 +293,9 @@ namespace Shopping.Data
                 _context.Categories.Add(new Category { Name = "Deportes" });
                 _context.Categories.Add(new Category { Name = "Apple" });
                 _context.Categories.Add(new Category { Name = "Mascotas" });
-               
+                _context.Categories.Add(new Category { Name = "Belleza" });
+                _context.Categories.Add(new Category { Name = "Gamer" });
+
             }
             await _context.SaveChangesAsync();
 
