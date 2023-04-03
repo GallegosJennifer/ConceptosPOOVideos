@@ -15,5 +15,8 @@ namespace Shopping.Data.Entities
         public ICollection<State> States { get; set; }
         [Display(Name = "Estados")]
         public int StatesNumber => States == null ? 0 : States.Count;
+        [Display(Name = "Ciudades")]
+        public int CitiesNumber => States == null ? 0 : States.Sum(s => s.CityNumber);
+
     }
 }
