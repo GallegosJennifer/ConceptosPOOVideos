@@ -35,12 +35,9 @@ namespace Shopping.Controllers
         }
         //[HttpGet]
         // GET: Countries/Details/5
-        public async Task<IActionResult> Details(int? id)
+        [NoDirectAccess]
+        public async Task<IActionResult> Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
             Country country = await _context.Countries
                 .Include(c => c.States)
@@ -271,13 +268,9 @@ namespace Shopping.Controllers
             return Json(new { isValid = false, html = ModalHelper.RenderRazorViewToString(this, "EditState", model) });
         }
         //Get EditCities
-        public async Task<IActionResult> EditCity(int? id)
+        [NoDirectAccess]
+        public async Task<IActionResult> EditCity(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             City city = await _context.Cities
                 .Include(c => c.State)
                 .FirstOrDefaultAsync(c => c.Id == id);
@@ -299,6 +292,7 @@ namespace Shopping.Controllers
         // POST: EditCities
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> EditCity(int id, CityViewModel model)
         {
             if (id != model.Id)
@@ -318,7 +312,11 @@ namespace Shopping.Controllers
                     };
                     _context.Update(city);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(DetailsState), new { Id = model.StateId });
+                    State state = await _context.States
+                                  .Include(s => s.Cities)
+                                  .FirstOrDefaultAsync(c => c.Id == model.StateId);
+                    _flashMessage.Confirmation("Registro actualizado.");
+                    return Json(new { isValid = true, html = ModalHelper.RenderRazorViewToString(this, "_ViewAllCities", state) });
                 }
                 catch (DbUpdateException dbUpdateException)
                 {
@@ -337,7 +335,7 @@ namespace Shopping.Controllers
                 }
 
             }
-            return View(model);
+            return Json(new { isValid = false, html = ModalHelper.RenderRazorViewToString(this, "EditCity", model) });
         }
 
 
