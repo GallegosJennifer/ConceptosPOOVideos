@@ -71,7 +71,7 @@ namespace NetCoreYoutube.Controllers
                 {
                     success = false,
                     message = "token incorrecto",
-                    result = "null"
+                    result = ""
                 };
             }
             return new
